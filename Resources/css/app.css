@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+    /* Hapus semua warna default Tailwind (red, blue, gray, dst) */
+    --color-*: initial;
+
+    /* Satu-satunya warna yang boleh dipakai di project ini */
+    --color-navy-deep: #010736;
+    --color-navy-dark: #0D1C42;
+    --color-navy: #22396F;
+    --color-cream: #FCF1D0;
+}

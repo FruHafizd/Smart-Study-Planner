@@ -1,0 +1,27 @@
+{
+  "name": "smart-study-planner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./Resources/css/app.css -o ./Public/css/app.css --minify",
+    "watch:css": "tailwindcss -i ./Resources/css/app.css -o ./Public/css/app.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FruHafizd/Smart-Study-Planner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FruHafizd/Smart-Study-Planner/issues"
+  },
+  "homepage": "https://github.com/FruHafizd/Smart-Study-Planner#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

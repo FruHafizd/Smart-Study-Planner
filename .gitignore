@@ -1,2 +1,4 @@
 .env
 smart_study_planner.sql
+node_modules/
+Public/css/app.css
