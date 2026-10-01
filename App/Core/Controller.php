@@ -2,6 +2,13 @@
 
 abstract class Controller 
 {
+    public function __construct()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+    }
+
     protected function view(string $viewPath, array $data = []) : void 
     {
         extract($data);
@@ -24,5 +31,12 @@ abstract class Controller
     {
         header('Location: /' . ltrim($path, '/'));
         exit;
+    }
+
+    protected function requireLogin() : void 
+    {
+        if (!isset($_SESSION['user_id'])) {
+            $this->redirect('/login');
+        }
     }
 }

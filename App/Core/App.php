@@ -43,6 +43,8 @@ class App
         $map = [
             'register' => ['controller' => 'Auth', 'method' => 'register'],
             'login' => ['controller' => 'Auth', 'method' => 'login'],
+            'dashboard' => ['controller' => 'Dashboard', 'method' => 'index'],
+            'logout' => ['controller' => 'Auth', 'method' => 'logout'],
         ];
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -51,6 +53,12 @@ class App
             }
             if ($url === 'login') {
                 return ['controller' => 'Auth', 'method' => 'Showlogin'];
+            }
+            if ($url === 'dashboard') {
+                return ['controller' => 'Dashboard', 'method' => 'index'];
+            }
+            if ($url === 'logout') {
+                return ['controller' => 'Auth', 'method' => 'logout'];
             }
         }
 

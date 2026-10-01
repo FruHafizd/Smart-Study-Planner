@@ -11,6 +11,8 @@ class AuthController extends Controller
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->userModel = new User();
         $this->pengaturanModel = new Pengaturan();
     }
@@ -77,11 +79,16 @@ class AuthController extends Controller
             return;
         }
 
-        session_start();
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['nama'] = $user['nama'];
 
         $this->redirect('/dashboard');
+    }
+
+    public function logout() : void 
+    {
+        session_destroy();
+        $this->redirect('/login');
     }
 
 }
