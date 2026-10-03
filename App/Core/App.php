@@ -38,30 +38,46 @@ class App
         return trim($url, '/');
     }
 
-    protected function route(string $url) : array 
+    protected function route(string $url): array
     {
-        $map = [
-            'register' => ['controller' => 'Auth', 'method' => 'register'],
-            'login' => ['controller' => 'Auth', 'method' => 'login'],
-            'dashboard' => ['controller' => 'Dashboard', 'method' => 'index'],
-            'logout' => ['controller' => 'Auth', 'method' => 'logout'],
+        $isPost = $_SERVER['REQUEST_METHOD'] === 'POST';
+
+        $routes = [
+            // url => [GET method, POST method]
+            'register'  => ['showRegister', 'register'],
+            'login'     => ['showLogin', 'login'],
+            'logout'    => ['logout', 'logout'],
+            'dashboard' => ['index', 'index'],
+
+            'matakuliah'        => ['index', 'store'],
+            'matakuliah/hapus'  => ['index', 'destroy'],
+
+            'jadwal'        => ['index', 'store'],
+            'jadwal/hapus'  => ['index', 'destroy'],
         ];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            if ($url === 'register') {
-                return ['controller' => 'Auth', 'method' => 'showRegister'];
-            }
-            if ($url === 'login') {
-                return ['controller' => 'Auth', 'method' => 'Showlogin'];
-            }
-            if ($url === 'dashboard') {
-                return ['controller' => 'Dashboard', 'method' => 'index'];
-            }
-            if ($url === 'logout') {
-                return ['controller' => 'Auth', 'method' => 'logout'];
-            }
+        $controllerMap = [
+            'register'  => 'Auth',
+            'login'     => 'Auth',
+            'logout'    => 'Auth',
+            'dashboard' => 'Dashboard',
+
+            'matakuliah'       => 'MataKuliah',
+            'matakuliah/hapus' => 'MataKuliah',
+
+            'jadwal'       => 'Jadwal',
+            'jadwal/hapus' => 'Jadwal',
+        ];
+
+        if (!isset($routes[$url])) {
+            return ['controller' => 'Auth', 'method' => 'showLogin'];
         }
 
-        return $map[$url] ?? ['controller' => 'Auth', 'method' => 'showLogin'];
+        $method = $isPost ? $routes[$url][1] : $routes[$url][0];
+
+        return [
+            'controller' => $controllerMap[$url],
+            'method' => $method,
+        ];
     }
 }
