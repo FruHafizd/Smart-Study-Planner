@@ -5,7 +5,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen">
-    <?php $halaman = 'matakuliah'; require __DIR__ . '/../layouts/nav.php'; ?>
+    <?php $halaman = 'jadwal'; require __DIR__ . '/../layouts/nav.php'; ?>
 
     <main class="p-6 max-w-3xl mx-auto">
         <h2 class="text-2xl font-semibold mb-4">Jadwal Kuliah</h2>
