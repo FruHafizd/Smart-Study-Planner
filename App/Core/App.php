@@ -54,6 +54,10 @@ class App
 
             'jadwal'        => ['index', 'store'],
             'jadwal/hapus'  => ['index', 'destroy'],
+
+            'tugas'               => ['index', 'store'],
+            'tugas/status'        => ['index', 'updateStatus'],
+            'tugas/hapus'         => ['index', 'destroy'],
         ];
 
         $controllerMap = [
@@ -67,6 +71,10 @@ class App
 
             'jadwal'       => 'Jadwal',
             'jadwal/hapus' => 'Jadwal',
+
+            'tugas'        => 'Tugas',
+            'tugas/status' => 'Tugas',
+            'tugas/hapus'  => 'Tugas',
         ];
 
         if (!isset($routes[$url])) {
