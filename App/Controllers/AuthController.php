@@ -67,20 +67,25 @@ class AuthController extends Controller
         $this->view('auth/login');
     }
 
-    public function login() : void 
+    public function login() : void
     {
         $email = trim($_POST['email'] ?? '');
-        $password = $_POST['password'] ?? '' ;
+        $password = $_POST['password'] ?? '';
 
         $user = $this->userModel->findByEmail($email);
 
         if (!$user || !password_verify($password, $user['password_hash'])) {
-            $this->view('auth/login', ['error' => 'Email atau passwrod salah.']);
+            $this->view('auth/login', ['error' => 'Email atau password salah.']);
             return;
         }
 
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['nama'] = $user['nama'];
+
+        // Generate notifikasi H-1 setiap kali user login (sesuai flowchart 3.1)
+        require_once __DIR__ . '/../models/Notifikasi.php';
+        $notifikasiModel = new Notifikasi();
+        $notifikasiModel->generateH1($user['id']);
 
         $this->redirect('/dashboard');
     }

@@ -75,6 +75,8 @@ class App
             'grup/tugas/status'  => ['detail', 'updateStatusTugas'],
             'grup/komentar'      => ['detail', 'storeKomentar'],
 
+            'notifikasi' => ['index', 'index'],
+
         ];
 
         $controllerMap = [
@@ -108,6 +110,8 @@ class App
             'grup/tugas'        => 'Grup',
             'grup/tugas/status' => 'Grup',
             'grup/komentar'     => 'Grup',
+
+            'notifikasi' => 'Notifikasi',
 
         ];
 
