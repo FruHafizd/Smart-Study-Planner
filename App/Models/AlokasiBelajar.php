@@ -34,4 +34,20 @@ class AlokasiBelajar extends Model
         $stmt->execute(['user_id' => $userId, 'minggu_mulai' => $mingguMulai]);
         return $stmt->fetchAll();
     }
+
+    // Total rencana vs realisasi minggu ini (sesuai flowchart: dibanding dengan total menit fokus)
+    public function evaluasiMingguan(int $userId, string $mingguMulai, array $realisasiPerMK): array
+    {
+        $stmt = $this->db->prepare(
+            "SELECT COALESCE(SUM(rencana_menit), 0) AS total_rencana
+            FROM alokasi_belajar
+            WHERE user_id = :user_id AND minggu_mulai = :minggu_mulai"
+        );
+        $stmt->execute(['user_id' => $userId, 'minggu_mulai' => $mingguMulai]);
+        $totalRencana = (int) $stmt->fetch()['total_rencana'];
+
+        $totalRealisasi = array_sum($realisasiPerMK);
+
+        return ['total_rencana' => $totalRencana, 'total_realisasi' => $totalRealisasi];
+    }
 }

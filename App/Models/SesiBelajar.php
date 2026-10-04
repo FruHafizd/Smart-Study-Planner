@@ -108,5 +108,26 @@ class SesiBelajar extends Model
         return $hasil;
     }
 
-    
+    // Waktu belajar per hari, 7 hari terakhir (untuk grafik)
+    public function produktivitas7Hari(int $userId): array
+    {
+        $stmt = $this->db->prepare(
+            "SELECT DATE(waktu_mulai) AS tanggal, SUM(durasi_aktual_detik) AS total_detik
+            FROM sesi_belajar
+            WHERE user_id = :user_id 
+            AND jenis = 'FOKUS' 
+            AND status = 'SELESAI'
+            AND waktu_mulai >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+            GROUP BY DATE(waktu_mulai)
+            ORDER BY tanggal ASC"
+        );
+        $stmt->execute(['user_id' => $userId]);
+
+        // Ubah ke array asosiatif: ['2026-09-28' => 45, ...] (dalam menit)
+        $hasil = [];
+        foreach ($stmt->fetchAll() as $row) {
+            $hasil[$row['tanggal']] = round($row['total_detik'] / 60);
+        }
+        return $hasil;
+    }
 }

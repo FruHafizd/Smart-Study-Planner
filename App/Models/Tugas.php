@@ -102,4 +102,39 @@ class Tugas extends Model
         $stmt->execute(['user_id' => $userId, 'awal' => $awal, 'akhir' => $akhir]);
         return $stmt->fetchAll();
     }
+
+    // Beban tugas minggu ini (Senin-Minggu)
+    public function bebanMingguIni(int $userId): array
+    {
+        $senin = date('Y-m-d', strtotime('monday this week'));
+        $minggu = date('Y-m-d', strtotime('sunday this week'));
+
+        $stmt = $this->db->prepare(
+            "SELECT COUNT(*) AS jumlah_tugas, COALESCE(SUM(estimasi_menit), 0) AS total_menit
+            FROM tugas
+            WHERE user_id = :user_id AND deadline BETWEEN :senin AND :minggu"
+        );
+        $stmt->execute(['user_id' => $userId, 'senin' => $senin, 'minggu' => $minggu]);
+        return $stmt->fetch();
+    }
+
+    // Persentase tugas yang selesai TEPAT WAKTU (selesai_pada <= deadline)
+    public function statistikKetepatan(int $userId): array
+    {
+        $stmt = $this->db->prepare(
+            "SELECT 
+                COUNT(*) AS total_selesai,
+                SUM(CASE WHEN DATE(selesai_pada) <= deadline THEN 1 ELSE 0 END) AS tepat_waktu
+            FROM tugas
+            WHERE user_id = :user_id AND status = 'SELESAI'"
+        );
+        $stmt->execute(['user_id' => $userId]);
+        $hasil = $stmt->fetch();
+
+        $persen = $hasil['total_selesai'] > 0
+            ? round($hasil['tepat_waktu'] / $hasil['total_selesai'] * 100)
+            : 0;
+
+        return ['total_selesai' => (int) $hasil['total_selesai'], 'persen_tepat_waktu' => $persen];
+    }
 }
