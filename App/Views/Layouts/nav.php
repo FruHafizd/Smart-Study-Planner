@@ -12,6 +12,7 @@ $jumlahNotifBelumDibaca = (new Notifikasi())->hitungBelumDibaca($_SESSION['user_
         <a href="/pomodoro" class="<?= $halaman === 'pomodoro' ? 'text-blue-700 font-medium' : 'text-gray-700 hover:underline' ?>">Pomodoro</a>
         <a href="/alokasi" class="<?= $halaman === 'alokasi' ? 'text-blue-700 font-medium' : 'text-gray-700 hover:underline' ?>">Alokasi</a>
         <a href="/grup" class="<?= $halaman === 'grup' ? 'text-blue-700 font-medium' : 'text-gray-700 hover:underline' ?>">Grup</a>
+        <a href="/kalender" class="<?= $halaman === 'kalender' ? 'text-blue-700 font-medium' : 'text-gray-700 hover:underline' ?>">Kalender</a>
 
         <a href="/notifikasi" class="relative text-gray-700 hover:text-blue-700">
             🔔

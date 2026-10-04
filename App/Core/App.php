@@ -76,6 +76,7 @@ class App
             'grup/komentar'      => ['detail', 'storeKomentar'],
 
             'notifikasi' => ['index', 'index'],
+            'kalender' => ['index', 'store'],
 
         ];
 
@@ -112,6 +113,7 @@ class App
             'grup/komentar'     => 'Grup',
 
             'notifikasi' => 'Notifikasi',
+            'kalender' => 'Kalender',
 
         ];
 

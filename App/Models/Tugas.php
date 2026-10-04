@@ -91,4 +91,15 @@ class Tugas extends Model
         $stmt->execute(['user_id' => $userId]);
         return $stmt->fetchAll();
     }
+
+    // Ambil tugas dengan deadline dalam rentang tanggal tertentu
+    public function getDeadlineRange(int $userId, string $awal, string $akhir): array
+    {
+        $stmt = $this->db->prepare(
+            "SELECT id, judul, deadline FROM tugas
+            WHERE user_id = :user_id AND deadline BETWEEN :awal AND :akhir"
+        );
+        $stmt->execute(['user_id' => $userId, 'awal' => $awal, 'akhir' => $akhir]);
+        return $stmt->fetchAll();
+    }
 }

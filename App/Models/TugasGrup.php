@@ -151,4 +151,18 @@ class TugasGrup extends Model
         return $stmt->fetchAll();
     }
 
+    // Ambil tugas grup dengan deadline dalam rentang tertentu, khusus untuk 1 user (sebagai anggota)
+    public function getDeadlineByAnggota(int $userId, string $awal, string $akhir): array
+    {
+        $stmt = $this->db->prepare(
+            "SELECT DISTINCT tugas_grup.id, tugas_grup.judul, tugas_grup.deadline
+            FROM tugas_grup
+            JOIN tugas_grup_anggota ON tugas_grup_anggota.tugas_grup_id = tugas_grup.id
+            WHERE tugas_grup_anggota.user_id = :user_id
+            AND DATE(tugas_grup.deadline) BETWEEN :awal AND :akhir"
+        );
+        $stmt->execute(['user_id' => $userId, 'awal' => $awal, 'akhir' => $akhir]);
+        return $stmt->fetchAll();
+    }
+
 }
