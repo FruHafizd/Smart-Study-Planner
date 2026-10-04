@@ -79,5 +79,34 @@ class SesiBelajar extends Model
         return (int) $stmt->fetch()['jumlah'];
     }
 
+    // Hitung total menit fokus per mata kuliah, dalam rentang 1 minggu
+    public function totalFokusPerMK(int $userId, string $mingguMulai): array
+    {
+        $mingguSelesai = date('Y-m-d', strtotime($mingguMulai . ' +6 days'));
+
+        $stmt = $this->db->prepare(
+            "SELECT mata_kuliah_id, SUM(durasi_aktual_detik) AS total_detik
+            FROM sesi_belajar
+            WHERE user_id = :user_id 
+            AND jenis = 'FOKUS'
+            AND status = 'SELESAI'
+            AND DATE(waktu_mulai) BETWEEN :mulai AND :selesai
+            GROUP BY mata_kuliah_id"
+        );
+        $stmt->execute([
+            'user_id' => $userId,
+            'mulai' => $mingguMulai,
+            'selesai' => $mingguSelesai,
+        ]);
+
+        // Ubah jadi array asosiatif: [mata_kuliah_id => total_menit] biar gampang dicocokkan nanti
+        $hasil = [];
+        foreach ($stmt->fetchAll() as $row) {
+            $hasil[$row['mata_kuliah_id']] = round($row['total_detik'] / 60);
+        }
+
+        return $hasil;
+    }
+
     
 }

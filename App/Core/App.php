@@ -65,6 +65,9 @@ class App
             'pomodoro/selesai'  => ['index', 'selesai'],
             'pomodoro/stop'     => ['index', 'stop'],
 
+            'alokasi'        => ['index', 'index'],
+            'alokasi/hitung' => ['index', 'hitung'],
+
         ];
 
         $controllerMap = [
@@ -88,6 +91,10 @@ class App
             'pomodoro/mulai'   => 'Pomodoro',
             'pomodoro/selesai' => 'Pomodoro',
             'pomodoro/stop'    => 'Pomodoro',
+
+            'alokasi'        => 'Alokasi',
+            'alokasi/hitung' => 'Alokasi',
+
         ];
 
         if (!isset($routes[$url])) {
