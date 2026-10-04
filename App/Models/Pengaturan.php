@@ -12,4 +12,13 @@ class Pengaturan extends Model
 
         $stmt->execute(['user_id' => $userId]);
     }
+
+    public function getByUser(int $userId): array|false
+    {
+        $stmt = $this->db->prepare(
+            "SELECT * FROM user_pengaturan WHERE user_id = :user_id"
+        );
+        $stmt->execute(['user_id' => $userId]);
+        return $stmt->fetch();
+    }
 }

@@ -60,6 +60,11 @@ class App
             'tugas/hapus'         => ['index', 'destroy'],
             'tugas/urutan'  => ['halamanUrutan', 'susunUrutan'],
 
+            'pomodoro'          => ['index', 'index'],
+            'pomodoro/mulai'    => ['index', 'mulai'],
+            'pomodoro/selesai'  => ['index', 'selesai'],
+            'pomodoro/stop'     => ['index', 'stop'],
+
         ];
 
         $controllerMap = [
@@ -78,6 +83,11 @@ class App
             'tugas/status' => 'Tugas',
             'tugas/hapus'  => 'Tugas',
             'tugas/urutan'  => 'Tugas',
+
+            'pomodoro'         => 'Pomodoro',
+            'pomodoro/mulai'   => 'Pomodoro',
+            'pomodoro/selesai' => 'Pomodoro',
+            'pomodoro/stop'    => 'Pomodoro',
         ];
 
         if (!isset($routes[$url])) {
