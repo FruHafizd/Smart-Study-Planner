@@ -7,6 +7,7 @@
         <a href="/tugas" class="<?= $halaman === 'tugas' ? 'text-blue-700 font-medium' : 'text-gray-700 hover:underline' ?>">Tugas</a>
         <a href="/pomodoro" class="<?= $halaman === 'pomodoro' ? 'text-blue-700 font-medium' : 'text-gray-700 hover:underline' ?>">Pomodoro</a>
         <a href="/alokasi" class="<?= $halaman === 'alokasi' ? 'text-blue-700 font-medium' : 'text-gray-700 hover:underline' ?>">Alokasi</a>
+        <a href="/grup" class="<?= $halaman === 'grup' ? 'text-blue-700 font-medium' : 'text-gray-700 hover:underline' ?>">Grup</a>
         <span class="text-gray-300">|</span>
         <span class="text-gray-700">Halo, <?= htmlspecialchars($_SESSION['nama']) ?></span>
         <a href="/logout" class="text-red-600 hover:underline">Logout</a>

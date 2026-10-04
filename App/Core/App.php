@@ -68,6 +68,13 @@ class App
             'alokasi'        => ['index', 'index'],
             'alokasi/hitung' => ['index', 'hitung'],
 
+            'grup'               => ['index', 'store'],
+            'grup/gabung'        => ['index', 'gabung'],
+            'grup/detail'        => ['detail', 'detail'],
+            'grup/tugas'         => ['detail', 'storeTugas'],
+            'grup/tugas/status'  => ['detail', 'updateStatusTugas'],
+            'grup/komentar'      => ['detail', 'storeKomentar'],
+
         ];
 
         $controllerMap = [
@@ -94,6 +101,13 @@ class App
 
             'alokasi'        => 'Alokasi',
             'alokasi/hitung' => 'Alokasi',
+
+            'grup'              => 'Grup',
+            'grup/gabung'       => 'Grup',
+            'grup/detail'       => 'Grup',
+            'grup/tugas'        => 'Grup',
+            'grup/tugas/status' => 'Grup',
+            'grup/komentar'     => 'Grup',
 
         ];
 
