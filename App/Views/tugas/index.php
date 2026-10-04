@@ -8,7 +8,12 @@
     <?php $halaman = 'tugas'; require __DIR__ . '/../layouts/nav.php'; ?>
 
     <main class="p-6 max-w-4xl mx-auto">
-        <h2 class="text-2xl font-semibold mb-4">Tugas</h2>
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-semibold">Tugas</h2>
+            <a href="/tugas/urutan" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 text-sm">
+                Susun Urutan & Gantt Chart
+            </a>
+        </div>
 
         <?php if (!empty($error)): ?>
             <p class="text-red-600 bg-red-50 border border-red-200 rounded p-3 mb-4"><?= htmlspecialchars($error) ?></p>

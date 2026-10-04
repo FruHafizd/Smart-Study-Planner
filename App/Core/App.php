@@ -58,6 +58,8 @@ class App
             'tugas'               => ['index', 'store'],
             'tugas/status'        => ['index', 'updateStatus'],
             'tugas/hapus'         => ['index', 'destroy'],
+            'tugas/urutan'  => ['halamanUrutan', 'susunUrutan'],
+
         ];
 
         $controllerMap = [
@@ -75,6 +77,7 @@ class App
             'tugas'        => 'Tugas',
             'tugas/status' => 'Tugas',
             'tugas/hapus'  => 'Tugas',
+            'tugas/urutan'  => 'Tugas',
         ];
 
         if (!isset($routes[$url])) {

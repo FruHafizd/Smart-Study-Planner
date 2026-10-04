@@ -81,4 +81,14 @@ class Tugas extends Model
 
         $stmt->execute(['id' => $id, 'user_id' => $userId]);
     }
+
+    public function getAktif(int $userId): array
+    {
+        $stmt = $this->db->prepare(
+            "SELECT * FROM tugas 
+            WHERE user_id = :user_id AND status IN ('BELUM', 'PROSES')"
+        );
+        $stmt->execute(['user_id' => $userId]);
+        return $stmt->fetchAll();
+    }
 }
